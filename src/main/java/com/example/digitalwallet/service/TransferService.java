@@ -38,7 +38,10 @@ public class TransferService {
     }
 
     @Transactional
-    public TransferResponse transferMoney(TransferRequest request) {
+    public TransferResponse transferMoney(
+            TransferRequest request,
+            String idempotencyKey
+    ) {
         Long senderUserId = authenticatedUser.authenticatedUserId();
         Long recipientUserId = request.getRecipientUserId();
 
