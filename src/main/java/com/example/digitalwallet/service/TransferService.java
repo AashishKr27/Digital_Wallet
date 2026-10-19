@@ -9,6 +9,7 @@ import com.example.digitalwallet.exception.InsufficientBalanceException;
 import com.example.digitalwallet.exception.SelfTransferNotAllowedException;
 import com.example.digitalwallet.exception.UserNotFoundException;
 import com.example.digitalwallet.repository.AccountRepository;
+import com.example.digitalwallet.repository.IdempotencyRecordRepository;
 import com.example.digitalwallet.repository.TransactionRepository;
 import com.example.digitalwallet.repository.UserRepository;
 import com.example.digitalwallet.security.AuthenticatedUser;
@@ -22,6 +23,7 @@ public class TransferService {
     private final AccountRepository accountRepository;
     private final TransactionRepository transactionRepository;
     private final UserRepository userRepository;
+    private final IdempotencyRecordRepository idempotencyRecordRepository;
     private final AuthenticatedUser authenticatedUser;
 
     @Autowired
@@ -29,11 +31,13 @@ public class TransferService {
             AccountRepository accountRepository,
             TransactionRepository transactionRepository,
             UserRepository userRepository,
+            IdempotencyRecordRepository idempotencyRecordRepository,
             AuthenticatedUser authenticatedUser
     ) {
         this.accountRepository = accountRepository;
         this.transactionRepository = transactionRepository;
         this.userRepository = userRepository;
+        this.idempotencyRecordRepository = idempotencyRecordRepository;
         this.authenticatedUser = authenticatedUser;
     }
 
